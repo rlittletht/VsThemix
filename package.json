@@ -1,0 +1,27 @@
+{
+  "name": "vsthemix",
+  "version": "1.0.0",
+  "description": "create vs themes from json",
+  "main": "vsthemix.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlittletht/VsThemix.git"
+  },
+  "author": "Rob Little",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rlittletht/VsThemix/issues"
+  },
+  "homepage": "https://github.com/rlittletht/VsThemix#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2"
+  }
+}
