@@ -7,6 +7,7 @@ import { Guid } from "./util/Guid.js";
 import { ByteArray } from "./util/ByteArray.js";
 import { write } from "fs";
 import { PkgString } from "./vstheme/PkgString.js";
+import { XmlToJson } from "./vstheme/XmlToJson.js";
 
 async function main(): Promise<void>
 {
@@ -37,15 +38,25 @@ async function main(): Promise<void>
         exit(0);
     }
 
-    const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
-    await compiler.CompileTheme(options.source, options.saveTemps);
+    if (options.operation === "compile")
+    {
+        const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
+        await compiler.CompileTheme(options.source, options.saveTemps);
+    }
+    else if (options.operation === "xml-to-json")
+    {
+        await XmlToJson.ConvertXmlToJson(options.source, options.destination);
+    }
 }
 
 // Top-level invocation
-(async () => {
-    try {
+(async () =>
+{
+    try
+    {
         await main();
-    } catch (err) {
+    } catch (err)
+    {
         console.error(err);
         process.exit(1);
     }

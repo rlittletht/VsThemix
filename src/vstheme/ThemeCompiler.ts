@@ -42,6 +42,16 @@ export class ThemeCompiler
         ["builtin:Shell", new Guid("73708ded-2d56-4aad-b8eb-73b20d3f4bff")]
     ]);
 
+    static ReduceGuidToBuiltinName(guid: Guid): string | null
+    {
+        for (const [name, builtinGuid] of this.builtinNameMap.entries())
+        {
+            if (guid.ToString().toLowerCase() === builtinGuid.ToString().toLowerCase())
+                return name;
+        }
+        return null;
+    }
+
     static expandOrThrow(builtinName: string): Guid
     {
         if (builtinName.startsWith("builtin:"))

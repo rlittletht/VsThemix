@@ -35,13 +35,13 @@ export class ManifestJson
             version: theme.version,
             type: "Vsix",
             vsixId: theme.extensionIdentity,
-            extensionDir: theme.extensionDir,
+            extensionDir: theme.extensionDir as string,
             dependencies: {
                 "Microsoft.VisualStudio.Component.CoreEditor": `[${theme.vsTargetMin || "18.0"},${theme.vsTargetMax || "19.0"})`
             },
             files: files
         };
 
-        manifestJson.writer.writeLine(JSON.stringify(manifest, null, 2));
+        manifestJson.writer.writeLine(JSON.stringify(manifest, null, 2).replace(/\r?\n/g, "\r\n"));
     }
 }

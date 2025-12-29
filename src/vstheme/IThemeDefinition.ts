@@ -14,5 +14,5 @@ export interface IThemeDefinition
     vsTargetMax?: string;
     fallback: string | Guid;
     categoryDefinitions: ICategoryDefinition[];
-    extensionDir: string;
+    extensionDir?: string;
 }

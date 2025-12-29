@@ -5,7 +5,8 @@ export class Guid
 
     static GuidPartsFromGuid(guid: string): string[]
     {
-        const parts = guid.split('-');
+        const trimmed = guid.trim().replace(/^\{/, '').replace(/\}$/, '');
+        const parts = trimmed.split('-');
 
         if (parts.length !== 5)
             throw new Error(`invalid GUID format: ${guid}. Expected 5 parts separated by hyphens.`);

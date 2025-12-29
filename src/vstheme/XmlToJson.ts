@@ -1,9 +1,10 @@
 import * as fs from 'fs';
 import { parseStringPromise } from 'xml2js';
-import { IThemeDefinition } from './IThemeDefinition.js';
-import { ICategoryDefinition } from './ICategoryDefinition.js';
-import { IElementDefinition } from './IElementDefinition.js';
-import { Guid } from '../util/Guid.js';
+import { IThemeDefinition } from './IThemeDefinition';
+import { ICategoryDefinition } from './ICategoryDefinition';
+import { IElementDefinition } from './IElementDefinition';
+import { Guid } from '../util/Guid';
+import { ThemeCompiler } from './ThemeCompiler';
 
 // Interfaces for the XML structure
 interface IXmlColor
@@ -77,8 +78,8 @@ export class XmlToJson
             // Convert ARGB format to #RRGGBB format
             if (source.length === 8)
             {
-                // Source is in AARRGGBB format, extract RRGGBB
-                return `#${source.substring(2)}`;
+                // Source is in AARRGGBB format, extract RRGGBBAA
+                return `#${source.substring(2)}${source.substring(0, 2)}`;
             }
             return `#${source}`;
         }
@@ -121,24 +122,33 @@ export class XmlToJson
                     }
                 }
 
-                categoryDefinitions.push({
+                const category: ICategoryDefinition = {
                     category: xmlCategory.$.Name,
-                    guid: xmlCategory.$.GUID,
                     elements
-                });
+                };
+
+                const builtin = ThemeCompiler.ReduceGuidToBuiltinName(new Guid(xmlCategory.$.GUID));
+                if (builtin)
+                {
+                    category.category = `builtin:${category.category}`;
+                }
+                else
+                {
+                    category.guid = xmlCategory.$.GUID;
+                }
+                categoryDefinitions.push(category);
             }
         }
 
         const themeDefinition: IThemeDefinition = {
             name: xmlTheme.$.Name,
             description: `${xmlTheme.$.Name} theme`,
-            extensionIdentity: xmlTheme.$.GUID,
-            author: "Unknown",
-            version: "1.0.0",
+            extensionIdentity: "<<Extension Identity>>",
+            author: "<<Author>>",
+            version: "<<Version>>",
             guid: xmlTheme.$.GUID,
             fallback: xmlTheme.$.FallbackId,
             categoryDefinitions,
-            extensionDir: ""
         };
 
         return themeDefinition;
@@ -171,8 +181,8 @@ export class XmlToJson
     async Convert(): Promise<void>
     {
         // Parse the XML file to get theme definition
-        const themeDefinition = await this.parseVsThemeFile(this.m_source);
-        const jsonContent = JSON.stringify(themeDefinition, null, 2);
+        const themeDefinition: IThemeDefinition = await this.parseVsThemeFile(this.m_source);
+        const jsonContent = JSON.stringify(themeDefinition, null, 2).replace(/\r?\n/g, "\r\n");
 
         fs.writeFileSync(this.m_destination, jsonContent, 'utf-8');
     }

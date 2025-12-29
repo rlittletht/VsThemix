@@ -1,33 +1,68 @@
-
 {
-    "name": "SampleThemeDark",   
+    "name": "SampleThemeDark",
     "description": "A sample theme based on the Dark theme.",
     "extensionIdentity": "Thetasoft.SampleThemeDark",
     "author": "Rob Little",
     "version": "1.0.0",
     "guid": "1f5823da-7cdb-4428-83f4-517038818b68",
-    "fallback" : "builtin:Dark",
+    "fallback": "builtin:Dark",
     "categoryDefinitions": [
         {
             "category": "builtin:Shell",
             "elements": [
-                {"element": "AccentFillDefault", "background": "#9184EEFF" },
-                {"element": "AccentFillSecondary", "background": "#00000080" },
-                {"element": "AccentFillTertiary", "background": "#9184EECC" },
-                {"element": "SolidBackgroundFillTertiary", "background": "#282828FF" },
-                {"element": "SolidBackgroundFillQuaternary", "background": "#2C2C2CFF" },
-                {"element": "SurfaceBackgroundFillDefault", "background": "#2C2C2CFF" },
-                {"element": "TextFillSecondary", "background": "#FFFFFFC8" }
+                {
+                    "element": "AccentFillDefault",
+                    "background": "#9184EEFF"
+                },
+                {
+                    "element": "AccentFillSecondary",
+                    "background": "#00000080"
+                },
+                {
+                    "element": "AccentFillTertiary",
+                    "background": "#9184EECC"
+                },
+                {
+                    "element": "SolidBackgroundFillTertiary",
+                    "background": "#282828FF"
+                },
+                {
+                    "element": "SolidBackgroundFillQuaternary",
+                    "background": "#2C2C2CFF"
+                },
+                {
+                    "element": "SurfaceBackgroundFillDefault",
+                    "background": "#2C2C2CFF"
+                },
+                {
+                    "element": "TextFillSecondary",
+                    "background": "#FFFFFFC8"
+                }
             ]
         },
         {
             "category": "builtin:ShellInternal",
             "elements": [
-                { "element": "EnvironmentBackground", "background": "#303050FF" },
-                { "element": "EnvironmentBorder", "background": "#9184EEFF" },
-                { "element": "EnvironmentIndicator", "background": "#75757566" },
-                { "element": "EnvironmentLogo", "background": "#9184EEFF" },
-                { "element": "EnvironmentLayeredBackground", "background": "#34344A4D" }
+                {
+                    "element": "EnvironmentBackground",
+                    "background": "#303050FF"
+                },
+                {
+                    "element": "EnvironmentBorder",
+                    "background": "#9184EEFF"
+                },
+                {
+                    "element": "EnvironmentIndicator",
+                    "background": "#75757566"
+                },
+                {
+                    "element": "EnvironmentLogo",
+                    "background": "#9184EEFF"
+                },
+                {
+                    "element": "EnvironmentLayeredBackground",
+                    "background": "#34344A4D"
+                }
             ]
         }
     ]
