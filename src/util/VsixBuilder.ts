@@ -1,4 +1,7 @@
 import { IStreamWriter, StreamWriter } from "./StreamWriter";
+import path from 'path';
+import archiver from 'archiver';
+
 const fs = require('fs');
 
 export class VsixFile
@@ -48,20 +51,34 @@ export class VsixBuilder
         this.m_outputPath = outputPath;
     }
 
-    BuildVsix(): void
+    async BuildVsix(dontCleanupTemp: boolean = false): Promise<void>
     {
-        // TODO: build the zip here
+        const tempDir = path.join(this.m_outputPath, `../temp_vsix_build_${Math.random().toString(36).substring(2, 15)}`);
 
-        // for now, just create files in the output path
-        if (!fs.existsSync(this.m_outputPath))
+        // Write files to temp directory first
+        if (!fs.existsSync(tempDir))
         {
-            fs.mkdirSync(this.m_outputPath, { recursive: true });
+            fs.mkdirSync(tempDir, { recursive: true });
         }
 
         for (const file of this.m_files)
         {
-            file.writeToFile(this.m_outputPath);
+            file.writeToFile(tempDir);
         }
+
+        // Create zip archive
+        const output = fs.createWriteStream(this.m_outputPath);
+        const archive = archiver('zip', { zlib: { level: 9 } });
+
+        archive.pipe(output);
+        archive.directory(tempDir, false);
+        await archive.finalize();
+
+        // Clean up temp directory
+        if (!dontCleanupTemp)
+            fs.rmSync(tempDir, { recursive: true, force: true });
+
+        return;
     }
 
     AddFile(filePath: string): VsixFile
