@@ -14,8 +14,9 @@ async function main(): Promise<void>
         [
             ["ut", { key: "runUnitTests", required: false, hasParameter: false, description: "Run all unit tests", ignoreRequiredArgs: true }],
             ["verbose", { key: "verbose", required: false, hasParameter: false, description: "Show verbose output" }],
-            ["themedef", { key: "themeDef", required: true, hasParameter: true, paramName: "themeDef", description: "theme definition file" }],
-            ["output", { key: "output", required: true, hasParameter: true, paramName: "output", description: "output path" }],
+            ["operation", { key: "operation", required: false, hasParameter: true, paramName: "operation", description: "operation to perform (compile | xml-to-json | json-to-xml)  default is compile" }],
+            ["source", { key: "source", required: true, hasParameter: true, paramName: "source", description: "input file or path" }],
+            ["destination", { key: "destination", required: true, hasParameter: true, paramName: "destination", description: "output file or path" }],
         ]);
 
     const parser = new CmdLineParser(optionDefinitions);
@@ -35,8 +36,8 @@ async function main(): Promise<void>
         exit(0);
     }
 
-    const compiler: ThemeCompiler = new ThemeCompiler(options.output);
-    await compiler.CompileTheme(options.themeDef);
+    const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
+    await compiler.CompileTheme(options.source);
 }
 
 // Top-level invocation
