@@ -13,6 +13,6 @@ export interface IThemeDefinition
     vsTargetMin?: string;
     vsTargetMax?: string;
     fallback: string | Guid;
-    categories: ICategoryDefinition[];
+    categoryDefinitions: ICategoryDefinition[];
     extensionDir: string;
 }

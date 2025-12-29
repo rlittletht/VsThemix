@@ -4,7 +4,7 @@ import { IElementDefinition } from "./IElementDefinition";
 
 export interface ICategoryDefinition
 {
-    name: string;
+    category: string;
     guid?: string | Guid;
     elements: IElementDefinition[];
 }

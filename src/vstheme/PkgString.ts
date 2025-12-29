@@ -26,4 +26,15 @@ export class PkgString
 
         return bytes;
     }
-};
+
+    static RunUnitTests(): void
+    {
+        const testString = new PkgString("Hello, World!");
+        const bytes = testString.ToBytes();
+        const expectedBytes = new Uint8Array([
+            13, 0, 0, 0, // Length prefix (13 bytes)
+            72, 101, 108, 108, 111, 44, 32, 87, 111, 114, 108, 100, 33 // "Hello, World!"
+        ]);
+    }
+}
+

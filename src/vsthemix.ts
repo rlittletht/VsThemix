@@ -6,6 +6,7 @@ import { exit } from "process";
 import { Guid } from "./util/Guid.js";
 import { ByteArray } from "./util/ByteArray.js";
 import { write } from "fs";
+import { PkgString } from "./vstheme/PkgString.js";
 
 const optionDefinitions = new Map<string, CmdLineOption>(
     [
@@ -26,6 +27,7 @@ if (options.runUnitTests)
     // Run unit tests here
     ByteArray.RunUnitTests();
     Guid.RunUnitTests();
+    PkgString.RunUnitTests();
 
     console.log("All unit tests passed.");
     exit(0);

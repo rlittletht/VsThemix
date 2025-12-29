@@ -34,7 +34,7 @@ export class VsixFile
         {
             fs.mkdirSync(dirPath, { recursive: true });
         }
-        fs.writeFileSync(fullPath, this.m_content.join('\n'), 'utf8');
+        fs.writeFileSync(fullPath, this.m_content.join('\r\n'), 'utf8');
     }
 }
 

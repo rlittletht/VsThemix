@@ -8,6 +8,7 @@ import { ContentTypes } from "./ContentTypes";
 import { Catalog } from "./Catalog";
 import { ManifestJson } from "./ManifestJson";
 import { Guid } from "../util/Guid";
+import { Pkgdef } from "./Pkgdef";
 
 export class ThemeCompiler
 {
@@ -20,8 +21,6 @@ export class ThemeCompiler
 
     static ValidateTheme(themeDef: IThemeDefinition): boolean
     {
-        themeDef.guid = new Guid(themeDef.guid as string);
-
         // validate version
         const versionRegex = /^\d+\.\d+\.\d+(\.\d+)?$/;
         if (!versionRegex.test(themeDef.version))
@@ -45,7 +44,7 @@ export class ThemeCompiler
 
     static expandOrThrow(builtinName: string): Guid
     {
-        if (!builtinName.startsWith("builtin:"))
+        if (builtinName.startsWith("builtin:"))
         {
             const guid = this.builtinNameMap.get(builtinName);
 
@@ -60,19 +59,20 @@ export class ThemeCompiler
 
     static ExpandBuiltinNames(themeDef: IThemeDefinition): void
     {
+        themeDef.guid = this.expandOrThrow(themeDef.guid as string);
         themeDef.fallback = this.expandOrThrow(themeDef.fallback as string);
 
-        for (const category of themeDef.categories)
+        for (const category of themeDef.categoryDefinitions)
         {
-            if (category.name.startsWith("builtin:"))
+            if (category.category.startsWith("builtin:"))
             {
-                category.guid = this.expandOrThrow(category.name);
-                category.name = category.name.substring("builtin:".length);
+                category.guid = this.expandOrThrow(category.category);
+                category.category = category.category.substring("builtin:".length);
             }
             else
             {
                 if (!category.guid)
-                    throw new Error(`Category "${category.name}" is missing a GUID in theme "${themeDef.name}".`);
+                    throw new Error(`Category "${category.category}" is missing a GUID in theme "${themeDef.name}".`);
 
                 category.guid = new Guid(category.guid as string);
             }
@@ -86,10 +86,10 @@ export class ThemeCompiler
         if (theme == null)
             throw new Error(`failed to read theme definition: ${themeDefPath}`);
 
+        ThemeCompiler.ExpandBuiltinNames(theme);
         theme.extensionDir = ThemeCompiler.getRandomExtensionDir(theme);
 
         ThemeCompiler.ValidateTheme(theme);
-        ThemeCompiler.ExpandBuiltinNames(theme);
 
         const builder: VsixBuilder = new VsixBuilder(this.m_output);
 
@@ -97,6 +97,7 @@ export class ThemeCompiler
         ContentTypes.AddContentTypesToVsix(builder);
         Catalog.AddCatalogToVsix(builder, theme);
         ManifestJson.AddManifestJsonToVsix(builder, theme);
+        Pkgdef.AddPkgdefToVsix(builder, theme);
 
         builder.BuildVsix();
     }

@@ -10,24 +10,24 @@
     "categoryDefinitions": [
         {
             "category": "builtin:Shell",
-            "definitions": [
-                {"element": "AccentFillDefault", "background": "#FF9184EE" },
-                {"element": "AccentFillSecondary", "background": "#80000000" },
-                {"element": "AccentFillTertiary", "background": "#CC9184EE" },
-                {"element": "SolidBackgroundFillTertiary", "background": "#FF282828" },
-                {"element": "SolidBackgroundFillQuaternary", "background": "#FF2C2C2C" },
-                {"element": "SurfaceBackgroundFillDefault", "background": "#FF2C2C2C" },
-                {"element": "TextFillSecondary", "background": "#C8FFFFFF" }
+            "elements": [
+                {"element": "AccentFillDefault", "background": "#9184EEFF" },
+                {"element": "AccentFillSecondary", "background": "#00000080" },
+                {"element": "AccentFillTertiary", "background": "#9184EECC" },
+                {"element": "SolidBackgroundFillTertiary", "background": "#282828FF" },
+                {"element": "SolidBackgroundFillQuaternary", "background": "#2C2C2CFF" },
+                {"element": "SurfaceBackgroundFillDefault", "background": "#2C2C2CFF" },
+                {"element": "TextFillSecondary", "background": "#FFFFFFC8" }
             ]
         },
         {
             "category": "builtin:ShellInternal",
-            "definitions": [
-                { "element": "EnvironmentBackground", "background": "#FF303050" },
-                { "element": "EnvironmentBorder", "background": "#FF9184EE" },
-                { "element": "EnvironmentIndicator", "background": "#66757575" },
-                { "element": "EnvironmentLogo", "background": "#FF9184EE" },
-                { "element": "EnvironmentLayeredBackground", "background": "#4D34344A" }
+            "elements": [
+                { "element": "EnvironmentBackground", "background": "#303050FF" },
+                { "element": "EnvironmentBorder", "background": "#9184EEFF" },
+                { "element": "EnvironmentIndicator", "background": "#75757566" },
+                { "element": "EnvironmentLogo", "background": "#9184EEFF" },
+                { "element": "EnvironmentLayeredBackground", "background": "#34344A4D" }
             ]
         }
     ]
