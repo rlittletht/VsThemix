@@ -12,6 +12,7 @@ export interface IOptions
     source: string;
     destination: string;
     runUnitTests: boolean;
+    saveTemps: boolean;
 }
 
 export const _defaultOptions: IOptions =
@@ -19,5 +20,6 @@ export const _defaultOptions: IOptions =
     operation: Operation.compile,
     source: "",
     destination: "",
-    runUnitTests: false
+    runUnitTests: false,
+    saveTemps: false
 }

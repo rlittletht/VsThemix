@@ -2,13 +2,58 @@
 import { VsixBuilder } from "../util/VsixBuilder";
 import { IThemeDefinition } from "./IThemeDefinition";
 
+interface IPackageLocalizedResourceContent
+{
+    language: string;
+    title: string;
+    description: string;
+}
+
+interface IPackagePayloadContent
+{
+    fileName: string;
+    size?: number;
+}
+
+interface IPackagePayloadInstallSizes
+{
+    installSize: number;
+}
+
+interface ICatalogPackageContent
+{
+    id: string;
+    version: string;
+    type: string;
+    extension?: boolean;
+    dependencies?: { [key: string]: string };
+    localizedResources?: IPackageLocalizedResourceContent[];
+
+    vsixId?: string;
+    extensionDir?: string;
+    payloads?: IPackagePayloadContent[];
+    installSizes?: IPackagePayloadInstallSizes;    
+}
+
+interface ICatalogContent
+{
+    manifestVersion: string;
+    info: {
+        id: string;
+        manifestType: string;
+    };
+    packages: ICatalogPackageContent[];
+
+}
+
 export class Catalog
 {
     static AddCatalogToVsix(builder: VsixBuilder, theme: IThemeDefinition): void
     {
         const catalog = builder.AddFile("catalog.json");
-        
-        const catalogData = {
+        const extensionName = builder.OutputFilename.split(/[\\/]/).pop() || builder.OutputFilename;
+
+        const catalogData: ICatalogContent = {
             manifestVersion: "1.1",
             info: {
                 id: `${theme.extensionIdentity},version=${theme.version}`,
@@ -40,13 +85,13 @@ export class Catalog
                     extensionDir: theme.extensionDir,
                     payloads: [
                         {
-                            fileName: builder.OutputFilename
+                            fileName: extensionName
                         }
                     ]
                 }
             ]
         };
         
-        catalog.writer.writeLine(JSON.stringify(catalogData));
+        catalog.writer.writeLine(JSON.stringify(catalogData, null, 2));
     }
 }

@@ -79,7 +79,7 @@ export class ThemeCompiler
         }
     }
 
-    async CompileTheme(themeDefPath: string): Promise<void>
+    async CompileTheme(themeDefPath: string, saveTemps: boolean): Promise<void>
     {
         const theme = JsonReader.ReadJsonFile<IThemeDefinition>(themeDefPath);
 
@@ -99,6 +99,6 @@ export class ThemeCompiler
         ManifestJson.AddManifestJsonToVsix(builder, theme);
         Pkgdef.AddPkgdefToVsix(builder, theme);
 
-        await builder.BuildVsix();
+        await builder.BuildVsix(saveTemps);
     }
 }

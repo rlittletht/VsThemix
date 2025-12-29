@@ -14,6 +14,7 @@ async function main(): Promise<void>
         [
             ["ut", { key: "runUnitTests", required: false, hasParameter: false, description: "Run all unit tests", ignoreRequiredArgs: true }],
             ["verbose", { key: "verbose", required: false, hasParameter: false, description: "Show verbose output" }],
+            ["saveTemps", { key: "saveTemps", required: false, hasParameter: false, description: "Save temporary files created during VSIX build" }],
             ["operation", { key: "operation", required: false, hasParameter: true, paramName: "operation", description: "operation to perform (compile | xml-to-json | json-to-xml)  default is compile" }],
             ["source", { key: "source", required: true, hasParameter: true, paramName: "source", description: "input file or path" }],
             ["destination", { key: "destination", required: true, hasParameter: true, paramName: "destination", description: "output file or path" }],
@@ -37,7 +38,7 @@ async function main(): Promise<void>
     }
 
     const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
-    await compiler.CompileTheme(options.source);
+    await compiler.CompileTheme(options.source, options.saveTemps);
 }
 
 // Top-level invocation
