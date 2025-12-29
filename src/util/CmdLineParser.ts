@@ -8,6 +8,7 @@ export interface CmdLineOption
     required: boolean;
     paramName?: string;
     description?: string;
+    ignoreRequiredArgs?: boolean;
 }
 
 export class CmdLineParser
@@ -70,6 +71,7 @@ export class CmdLineParser
     ParseArgs<T>(args: string[], t: T)
     {
         const switchesFound = new Set<string>();
+        let ignoreRequiredArgs: boolean = false;
 
         for (let i = 0; i < args.length; i++)
         {
@@ -88,6 +90,9 @@ export class CmdLineParser
                 this.usage(`unknown switch: ${_switch}`);
                 throw new Error("unreachable");
             }
+
+            if (def.ignoreRequiredArgs)
+                ignoreRequiredArgs = true;
 
             switchesFound.add(def.key);
 
@@ -109,6 +114,9 @@ export class CmdLineParser
             }
         }
 
+        if (ignoreRequiredArgs)
+            return;
+        
         // and finally make sure we have all required switches
         for (const key of this.definitions.keys())
         {

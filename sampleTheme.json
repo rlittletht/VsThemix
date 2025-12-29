@@ -1,0 +1,34 @@
+
+{
+    "name": "SampleThemeDark",   
+    "description": "A sample theme based on the Dark theme.",
+    "extensionIdentity": "Thetasoft.SampleThemeDark",
+    "author": "Rob Little",
+    "version": "1.0.0",
+    "guid": "1f5823da-7cdb-4428-83f4-517038818b68",
+    "fallback" : "builtin:Dark",
+    "categoryDefinitions": [
+        {
+            "category": "builtin:Shell",
+            "definitions": [
+                {"element": "AccentFillDefault", "background": "#FF9184EE" },
+                {"element": "AccentFillSecondary", "background": "#80000000" },
+                {"element": "AccentFillTertiary", "background": "#CC9184EE" },
+                {"element": "SolidBackgroundFillTertiary", "background": "#FF282828" },
+                {"element": "SolidBackgroundFillQuaternary", "background": "#FF2C2C2C" },
+                {"element": "SurfaceBackgroundFillDefault", "background": "#FF2C2C2C" },
+                {"element": "TextFillSecondary", "background": "#C8FFFFFF" }
+            ]
+        },
+        {
+            "category": "builtin:ShellInternal",
+            "definitions": [
+                { "element": "EnvironmentBackground", "background": "#FF303050" },
+                { "element": "EnvironmentBorder", "background": "#FF9184EE" },
+                { "element": "EnvironmentIndicator", "background": "#66757575" },
+                { "element": "EnvironmentLogo", "background": "#FF9184EE" },
+                { "element": "EnvironmentLayeredBackground", "background": "#4D34344A" }
+            ]
+        }
+    ]
+}
