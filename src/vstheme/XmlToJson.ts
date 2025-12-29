@@ -6,7 +6,8 @@ import { IElementDefinition } from './IElementDefinition.js';
 import { Guid } from '../util/Guid.js';
 
 // Interfaces for the XML structure
-interface IXmlColor {
+interface IXmlColor
+{
     $: {
         Name: string;
     };
@@ -24,7 +25,8 @@ interface IXmlColor {
     }>;
 }
 
-interface IXmlCategory {
+interface IXmlCategory
+{
     $: {
         Name: string;
         GUID: string;
@@ -32,7 +34,8 @@ interface IXmlCategory {
     Color: IXmlColor[];
 }
 
-interface IXmlTheme {
+interface IXmlTheme
+{
     $: {
         Name: string;
         GUID: string;
@@ -42,7 +45,8 @@ interface IXmlTheme {
     Category: IXmlCategory[];
 }
 
-interface IXmlThemes {
+interface IXmlThemes
+{
     Themes: {
         Theme: IXmlTheme[];
     };
@@ -50,16 +54,29 @@ interface IXmlThemes {
 
 export class XmlToJson
 {
+    private m_source: string;
+    private m_destination: string;
+
+    constructor(source: string, destination: string)
+    {
+        this.m_source = source;
+        this.m_destination = destination;
+    }
+
     /**
      * Parse the XML content and convert to theme definition structure
      */
-    private static parseColorValue(type: string, source: string): string | undefined {
-        if (type === "CT_INVALID" || source === "00000000") {
+    private static parseColorValue(type: string, source: string): string | undefined
+    {
+        if (type === "CT_INVALID" || source === "00000000")
+        {
             return undefined;
         }
-        if (type === "CT_RAW") {
+        if (type === "CT_RAW")
+        {
             // Convert ARGB format to #RRGGBB format
-            if (source.length === 8) {
+            if (source.length === 8)
+            {
                 // Source is in AARRGGBB format, extract RRGGBB
                 return `#${source.substring(2)}`;
             }
@@ -71,25 +88,30 @@ export class XmlToJson
     /**
      * Convert XML theme structure to JSON theme definition
      */
-    private static convertToThemeDefinition(xmlData: IXmlThemes): IThemeDefinition {
+    convertToThemeDefinition(xmlData: IXmlThemes): IThemeDefinition
+    {
         const xmlTheme = xmlData.Themes.Theme[0];
-        
+
         const categoryDefinitions: ICategoryDefinition[] = [];
-        
-        if (xmlTheme.Category) {
-            for (const xmlCategory of xmlTheme.Category) {
+
+        if (xmlTheme.Category)
+        {
+            for (const xmlCategory of xmlTheme.Category)
+            {
                 const elements: IElementDefinition[] = [];
-                
-                if (xmlCategory.Color) {
-                    for (const xmlColor of xmlCategory.Color) {
+
+                if (xmlCategory.Color)
+                {
+                    for (const xmlColor of xmlCategory.Color)
+                    {
                         const background = xmlColor.Background && xmlColor.Background[0]
-                            ? this.parseColorValue(xmlColor.Background[0].$.Type, xmlColor.Background[0].$.Source)
+                            ? XmlToJson.parseColorValue(xmlColor.Background[0].$.Type, xmlColor.Background[0].$.Source)
                             : undefined;
-                        
+
                         const foreground = xmlColor.Foreground && xmlColor.Foreground[0]
-                            ? this.parseColorValue(xmlColor.Foreground[0].$.Type, xmlColor.Foreground[0].$.Source)
+                            ? XmlToJson.parseColorValue(xmlColor.Foreground[0].$.Type, xmlColor.Foreground[0].$.Source)
                             : undefined;
-                        
+
                         elements.push({
                             element: xmlColor.$.Name,
                             background,
@@ -98,7 +120,7 @@ export class XmlToJson
                         });
                     }
                 }
-                
+
                 categoryDefinitions.push({
                     category: xmlCategory.$.Name,
                     guid: xmlCategory.$.GUID,
@@ -106,7 +128,7 @@ export class XmlToJson
                 });
             }
         }
-        
+
         const themeDefinition: IThemeDefinition = {
             name: xmlTheme.$.Name,
             description: `${xmlTheme.$.Name} theme`,
@@ -118,17 +140,18 @@ export class XmlToJson
             categoryDefinitions,
             extensionDir: ""
         };
-        
+
         return themeDefinition;
     }
 
     /**
      * Parse a vstheme XML file and return the theme definition
      */
-    static async parseVsThemeFile(filePath: string): Promise<IThemeDefinition> {
+    async parseVsThemeFile(filePath: string): Promise<IThemeDefinition>
+    {
         // Read the XML file
         const xmlContent = fs.readFileSync(filePath, 'utf-8');
-        
+
         // Parse XML to JavaScript object
         // preserveChildrenOrder and explicitChildren help maintain structure
         const parseOptions = {
@@ -138,22 +161,27 @@ export class XmlToJson
             charkey: '_',
             attrkey: '$'
         };
-        
+
         const xmlData = await parseStringPromise(xmlContent, parseOptions) as IXmlThemes;
-        
+
         // Convert to theme definition
         return this.convertToThemeDefinition(xmlData);
     }
 
-    static ConvertXmlToJson(source: string, destination: string): void
+    async Convert(): Promise<void>
     {
-        this.parseVsThemeFile(source).then(themeDefinition => {
-            const jsonContent = JSON.stringify(themeDefinition, null, 2);
-            fs.writeFileSync(destination, jsonContent, 'utf-8');
-            console.log(`Successfully converted ${source} to ${destination}`);
-        }).catch(error => {
-            console.error(`Error converting XML to JSON: ${error}`);
-            throw error;
-        });
+        // Parse the XML file to get theme definition
+        const themeDefinition = await this.parseVsThemeFile(this.m_source);
+        const jsonContent = JSON.stringify(themeDefinition, null, 2);
+
+        fs.writeFileSync(this.m_destination, jsonContent, 'utf-8');
+    }
+
+    static async ConvertXmlToJson(source: string, destination: string): Promise<void>
+    {
+        const converter = new XmlToJson(source, destination);
+
+        await converter.Convert();
+        console.log(`Successfully converted ${source} to ${destination}`);
     }
 }
