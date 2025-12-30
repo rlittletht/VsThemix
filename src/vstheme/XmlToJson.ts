@@ -6,6 +6,7 @@ import { IElementDefinition } from './IElementDefinition';
 import { Guid } from '../util/Guid';
 import { ThemeCompiler } from './ThemeCompiler';
 import { IJsonStringifyOptions, JsonStringifier } from '../util/JsonStringifier';
+import { Builtins } from './Builtins';
 
 // Interfaces for the XML structure
 interface IXmlColor
@@ -128,7 +129,7 @@ export class XmlToJson
                     elements
                 };
 
-                const builtin = ThemeCompiler.ReduceGuidToBuiltinName(new Guid(xmlCategory.$.GUID));
+                const builtin = Builtins.ReduceGuidToBuiltinName(new Guid(xmlCategory.$.GUID));
                 if (builtin)
                 {
                     category.category = `builtin:${category.category}`;
@@ -141,7 +142,7 @@ export class XmlToJson
             }
         }
 
-        const builtinFallback = ThemeCompiler.ReduceGuidToBuiltinName(new Guid(xmlTheme.$.FallbackId));
+        const builtinFallback = Builtins.ReduceGuidToBuiltinName(new Guid(xmlTheme.$.FallbackId));
 
         if (builtinFallback)
         {
