@@ -5,7 +5,6 @@ import { _defaultOptions, IOptions } from "./util/IOptions";
 import { exit } from "process";
 import { Guid } from "./util/Guid";
 import { ByteArray } from "./util/ByteArray";
-import { write } from "fs";
 import { PkgString } from "./vstheme/PkgString";
 import { XmlToJson } from "./vstheme/XmlToJson";
 
@@ -16,6 +15,7 @@ async function main(): Promise<void>
             ["ut", { key: "runUnitTests", required: false, hasParameter: false, description: "Run all unit tests", ignoreRequiredArgs: true }],
             ["verbose", { key: "verbose", required: false, hasParameter: false, description: "Show verbose output" }],
             ["saveTemps", { key: "saveTemps", required: false, hasParameter: false, description: "Save temporary files created during VSIX build" }],
+            ["testBuild", { key: "testBuild", required: false, hasParameter: false, description: "Build a VSIX for testing. A new guid will be generated always to ensure clean caches", ignoreRequiredArgs: true }],
             ["operation", { key: "operation", required: false, hasParameter: true, paramName: "operation", description: "operation to perform (compile | xml-to-json | json-to-xml)  default is compile" }],
             ["source", { key: "source", required: true, hasParameter: true, paramName: "source", description: "input file or path" }],
             ["destination", { key: "destination", required: true, hasParameter: true, paramName: "destination", description: "output file or path" }],
@@ -41,7 +41,7 @@ async function main(): Promise<void>
     if (options.operation === "compile")
     {
         const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
-        await compiler.CompileTheme(options.source, options.saveTemps);
+        await compiler.CompileTheme(options.source, options.saveTemps, options.testBuild);
     }
     else if (options.operation === "xml-to-json")
     {

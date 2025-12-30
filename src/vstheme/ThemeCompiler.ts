@@ -37,7 +37,7 @@ export class ThemeCompiler
         return `[installdir]\\\\Common7\\\\IDE\\\\Extensions\\\\${reversed_guid.substring(0, 8)}.${reversed_guid.substring(8, 11)}`;
     }
 
-    async CompileTheme(themeDefPath: string, saveTemps: boolean): Promise<void>
+    async CompileTheme(themeDefPath: string, saveTemps: boolean, testBuild: boolean): Promise<string>
     {
         const theme = JsonReader.ReadJsonFile<IThemeDefinition>(themeDefPath);
 
@@ -45,8 +45,13 @@ export class ThemeCompiler
             throw new Error(`failed to read theme definition: ${themeDefPath}`);
 
         Builtins.ExpandBuiltinNames(theme);
-        theme.extensionDir = ThemeCompiler.getRandomExtensionDir(theme);
+        if (testBuild)
+        {
+            theme.guid = Guid.NewGuid();
+            theme.extensionIdentity = `${theme.name}-test`;
+        }
 
+        theme.extensionDir = ThemeCompiler.getRandomExtensionDir(theme);
         ThemeCompiler.ValidateTheme(theme);
 
         const builder: VsixBuilder = new VsixBuilder(this.m_output);
@@ -58,5 +63,13 @@ export class ThemeCompiler
         Pkgdef.AddPkgdefToVsix(builder, theme);
 
         await builder.BuildVsix(saveTemps);
+
+        console.log(`Successfully built VSIX: ${this.m_output}`);
+        console.log(`\nUNINSTALL:`);
+        console.log(`  start /wait "" "%VSINSTALLDIR%\\Common7\\IDE\\VSIXInstaller.exe" /quiet /uninstall:"${theme.extensionIdentity}"`);
+
+        console.log(`\nINSTALL:`);
+        console.log(`  start /wait "" "%VSINSTALLDIR%\\Common7\\IDE\\VSIXInstaller.exe" /quiet "${this.m_output}"`);
+        return this.m_output;
     }
 }

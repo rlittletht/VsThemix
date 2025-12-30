@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 
 export class Guid
 {
@@ -137,5 +138,10 @@ export class Guid
     static RunUnitTests(): void
     {
         this.DoTestGuidToBytes();
+    }
+    static NewGuid(): Guid
+    {
+        const guidString = uuidv4();
+        return new Guid(guidString);
     }
 }

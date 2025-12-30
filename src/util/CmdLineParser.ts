@@ -9,6 +9,7 @@ export interface CmdLineOption
     paramName?: string;
     description?: string;
     ignoreRequiredArgs?: boolean;
+    testBuild?: boolean;
 }
 
 export class CmdLineParser
@@ -116,7 +117,7 @@ export class CmdLineParser
 
         if (ignoreRequiredArgs)
             return;
-        
+
         // and finally make sure we have all required switches
         for (const key of this.definitions.keys())
         {

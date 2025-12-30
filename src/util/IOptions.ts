@@ -13,6 +13,7 @@ export interface IOptions
     destination: string;
     runUnitTests: boolean;
     saveTemps: boolean;
+    testBuild: boolean;
 }
 
 export const _defaultOptions: IOptions =
@@ -21,5 +22,6 @@ export const _defaultOptions: IOptions =
     source: "",
     destination: "",
     runUnitTests: false,
-    saveTemps: false
+    saveTemps: false,
+    testBuild: false
 }
