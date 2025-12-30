@@ -5,6 +5,7 @@ import { ICategoryDefinition } from './ICategoryDefinition';
 import { IElementDefinition } from './IElementDefinition';
 import { Guid } from '../util/Guid';
 import { ThemeCompiler } from './ThemeCompiler';
+import { IJsonStringifyOptions, JsonStringifier } from '../util/JsonStringifier';
 
 // Interfaces for the XML structure
 interface IXmlColor
@@ -189,7 +190,15 @@ export class XmlToJson
     {
         // Parse the XML file to get theme definition
         const themeDefinition: IThemeDefinition = await this.parseVsThemeFile(this.m_source);
-        const jsonContent = JSON.stringify(themeDefinition, null, 2).replace(/\r?\n/g, "\r\n");
+
+        const options: IJsonStringifyOptions = {
+            maxInlineLength: 180,
+            inlineArrays: true,
+            inlineObjects: true
+        };
+
+        const stringifier = new JsonStringifier(options);
+        const jsonContent = stringifier.stringify(themeDefinition).replace(/\r?\n/g, "\r\n");
 
         fs.writeFileSync(this.m_destination, jsonContent, 'utf-8');
     }
