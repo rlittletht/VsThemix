@@ -1,0 +1,72 @@
+{
+  "name": "DarkOnDark2026",
+  "description": "DarkEditor on Dark Shell theme",
+  "extensionIdentity": "Thetasoft.DarkOnDark2026",
+  "author": "Rob Little",
+  "version": "1.0.0",
+  "guid": "{4a5be3d3-f512-42c2-8dc3-5bee52cc72d9}",
+  "fallback": "builtin:Dark",
+  "categoryDefinitions": [
+    {"category": "builtin:Text Editor MEF Items", "elements": [{"element": "punctuation", "foreground": "#00FFFFFF"}, {"element": "keyword - control", "foreground": "#4EC9B0FF"}]},
+    {
+      "category": "builtin:Cpp Text Editor MEF Items",
+      "elements": [
+        {"element": "Type", "foreground": "#00FFFFFF"},
+        {"element": "Preprocessor Keyword", "foreground": "#4EC9B0FF"},
+        {"element": "Operator", "foreground": "#4EC9B0FF"},
+        {"element": "Literal", "foreground": "#FFFF90FF"},
+        {"element": "local name", "foreground": "#00FFFFFF"},
+        {"element": "field name", "foreground": "#31FF00FF"},
+        {"element": "parameter name", "foreground": "#31FF00FF"},
+        {"element": "method name", "foreground": "#31FF00FF"},
+        {"element": "extension method name", "foreground": "#31FF00FF"},
+        {"element": "namespace name", "foreground": "#569CD6FF"}
+      ]
+    },
+    {
+      "category": "builtin:Text Editor Language Service Items",
+      "elements": [
+        {"element": "Keyword", "foreground": "#00FFFFFF"},
+        {"element": "Comment", "foreground": "#7F8585FF"},
+        {"element": "Identifier", "foreground": "#31FF00FF"},
+        {"element": "String", "foreground": "#E8BF6AFF"},
+        {"element": "Number", "foreground": "#E8BF6AFF"},
+        {"element": "Text", "foreground": "#31FF00FF"},
+        {"element": "Operator", "foreground": "#E8BF6AFF"}
+      ]
+    },
+    {
+      "category": "builtin:Text Editor Text Manager Items",
+      "elements": [
+        {"element": "Plain Text", "background": "#000000FF", "foreground": "#B5B5C9FF"},
+        {"element": "Selected Text", "background": "#E9E9E9FF"},
+        {"element": "Inactive Selected Text", "background": "#193C80FF"},
+        {"element": "Indicator Margin", "background": "#282C46FF"},
+        {"element": "Visible Whitespace", "foreground": "#666B91FF"}
+      ]
+    },
+    {"category": "builtin:TreeView", "elements": [{"element": "Background", "background": "#3B3B50FF", "foreground": "#FAFAFAFF"}]},
+    {
+      "category": "builtin:Shell",
+      "elements": [
+        {"element": "AccentFillDefault", "background": "#9184EEFF"},
+        {"element": "AccentFillSecondary", "background": "#00000080"},
+        {"element": "AccentFillTertiary", "background": "#9184EECC"},
+        {"element": "SolidBackgroundFillTertiary", "background": "#282828FF"},
+        {"element": "SolidBackgroundFillQuaternary", "background": "#2C2C2CFF"},
+        {"element": "SurfaceBackgroundFillDefault", "background": "#2C2C2CFF"},
+        {"element": "TextFillSecondary", "background": "#FFFFFFC8"}
+      ]
+    },
+    {
+      "category": "builtin:ShellInternal",
+      "elements": [
+        {"element": "EnvironmentBackground", "background": "#303050FF"},
+        {"element": "EnvironmentBorder", "background": "#9184EEFF"},
+        {"element": "EnvironmentIndicator", "background": "#75757566"},
+        {"element": "EnvironmentLogo", "background": "#9184EEFF"},
+        {"element": "EnvironmentLayeredBackground", "background": "#34344A4D"}
+      ]
+    }
+  ]
+}
