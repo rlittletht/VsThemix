@@ -6,7 +6,12 @@
   "scripts": {
     "build": "tsc",
     "ut": "node ./build/src/vsthemix.js -ut",
-    "test": "run-s build ut"
+    "test": "run-s build ut",
+    "compile": "node ./build/src/vsthemix.js -operation compile -source %npm_config_source% -destination %npm_config_destination%",
+    "test-remove-vsix": "start /wait \"\" \"%VSINSTALLDIR%\\Common7\\IDE\\VSIXInstaller.exe\" /quiet /uninstall:\"VsThemix.TestTheme\"",
+    "test-install-vsix": "start /wait \"\" \"%VSINSTALLDIR%\\Common7\\IDE\\VSIXInstaller.exe\" /quiet \"./working/test.vsix\"",
+    "test-compile": "node ./build/src/vsthemix.js -testBuild -saveTemps -operation compile -source %npm_config_source% -destination ./working/test.vsix",
+    "test-vsix": "run-s test-remove-vsix test-compile test-install-vsix"
   },
   "repository": {
     "type": "git",

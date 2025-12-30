@@ -48,7 +48,8 @@ export class ThemeCompiler
         if (testBuild)
         {
             theme.guid = Guid.NewGuid();
-            theme.extensionIdentity = `${theme.name}-test`;
+            theme.extensionIdentity = `VsThemix.TestTheme`;
+            theme.name = `VsThemix Test Theme`;
         }
 
         theme.extensionDir = ThemeCompiler.getRandomExtensionDir(theme);
