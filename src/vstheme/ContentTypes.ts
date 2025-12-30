@@ -1,5 +1,5 @@
 
-import { VsixBuilder } from "../util/VsixBuilder.js";
+import { VsixBuilder } from "../util/VsixBuilder";
 
 export class ContentTypes
 {

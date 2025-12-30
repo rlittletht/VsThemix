@@ -1,5 +1,5 @@
 
-import { StringBuilder } from "./StringBuilder.js";
+import { StringBuilder } from "./StringBuilder";
 
 export enum ByteOrder
 {

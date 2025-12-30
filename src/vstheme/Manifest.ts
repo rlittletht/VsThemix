@@ -1,7 +1,7 @@
 
-import { IStreamWriter } from "../util/StreamWriter.js";
-import { VsixBuilder } from "../util/VsixBuilder.js";
-import { IThemeDefinition } from "./IThemeDefinition.js";
+import { IStreamWriter } from "../util/StreamWriter";
+import { VsixBuilder } from "../util/VsixBuilder";
+import { IThemeDefinition } from "./IThemeDefinition";
 
 export class Manifest
 {

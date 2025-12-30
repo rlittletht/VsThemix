@@ -140,6 +140,13 @@ export class XmlToJson
             }
         }
 
+        const builtinFallback = ThemeCompiler.ReduceGuidToBuiltinName(new Guid(xmlTheme.$.FallbackId));
+
+        if (builtinFallback)
+        {
+            xmlTheme.$.FallbackId = `${builtinFallback}`;
+        }
+
         const themeDefinition: IThemeDefinition = {
             name: xmlTheme.$.Name,
             description: `${xmlTheme.$.Name} theme`,

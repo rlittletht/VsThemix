@@ -1,13 +1,13 @@
 
-import { ThemeCompiler } from "./vstheme/ThemeCompiler.js";
-import { CmdLineParser, CmdLineOption } from "./util/CmdLineParser.js";
-import { _defaultOptions, IOptions } from "./util/IOptions.js";
+import { ThemeCompiler } from "./vstheme/ThemeCompiler";
+import { CmdLineParser, CmdLineOption } from "./util/CmdLineParser";
+import { _defaultOptions, IOptions } from "./util/IOptions";
 import { exit } from "process";
-import { Guid } from "./util/Guid.js";
-import { ByteArray } from "./util/ByteArray.js";
+import { Guid } from "./util/Guid";
+import { ByteArray } from "./util/ByteArray";
 import { write } from "fs";
-import { PkgString } from "./vstheme/PkgString.js";
-import { XmlToJson } from "./vstheme/XmlToJson.js";
+import { PkgString } from "./vstheme/PkgString";
+import { XmlToJson } from "./vstheme/XmlToJson";
 
 async function main(): Promise<void>
 {
