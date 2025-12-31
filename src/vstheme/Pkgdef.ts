@@ -18,9 +18,11 @@ export class Pkgdef
         pkgdef.writer.writeLine(`@="${theme.name}"`);
         pkgdef.writer.writeLine(`"Name"="${theme.name}"`);
         pkgdef.writer.writeLine(`"FallbackId"="${(theme.fallback as Guid).ToString()}"`);
-        
+
         for (const category of theme.categoryDefinitions)
         {
+            if (category.ignore)
+                continue;
             if (!category.guid)
                 throw new Error(`Category "${category.category}" is missing a GUID in theme "${theme.name}".`);
 
@@ -39,6 +41,8 @@ export class Pkgdef
             // now add all the elements
             for (const element of category.elements)
             {
+                if (element.ignore)
+                    continue;
                 const name: Uint8Array = new PkgString(element.element).ToBytes();
 
                 categoryBytes.add(name);
@@ -57,10 +61,17 @@ export class Pkgdef
                     backgroundOrMask[4] = 0x00;
 
                     if (element.fontStyle === FontStyleEnum.bold)
-                        backgroundOrMask[3] = 0x01;
+                        backgroundOrMask[1] = 0x01;
                     else if (element.fontStyle === FontStyleEnum.italic)
-                        backgroundOrMask[3] = 0x02;
-
+                        backgroundOrMask[1] = 0x02;
+                    else if (element.fontStyle.length === 10)
+                    {
+                        backgroundOrMask[0] = parseInt(element.fontStyle.substring(0, 2), 16);
+                        backgroundOrMask[1] = parseInt(element.fontStyle.substring(2, 4), 16);
+                        backgroundOrMask[2] = parseInt(element.fontStyle.substring(4, 6), 16);
+                        backgroundOrMask[3] = parseInt(element.fontStyle.substring(6, 8), 16);
+                        backgroundOrMask[4] = parseInt(element.fontStyle.substring(8, 10), 16);
+                    }
                     categoryBytes.add(backgroundOrMask);
                 }
                 else if (element.background !== undefined)

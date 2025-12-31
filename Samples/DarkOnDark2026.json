@@ -7,32 +7,55 @@
   "guid": "{4a5be3d3-f512-42c2-8dc3-5bee52cc72d9}",
   "fallback": "builtin:Dark",
   "categoryDefinitions": [
-    {"category": "builtin:Text Editor MEF Items", "elements": [{"element": "punctuation", "foreground": "#00FFFFFF"}, {"element": "keyword - control", "foreground": "#4EC9B0FF"}]},
-    {
-      "category": "builtin:Cpp Text Editor MEF Items",
-      "elements": [
-        {"element": "Type", "foreground": "#00FFFFFF"},
-        {"element": "Preprocessor Keyword", "foreground": "#4EC9B0FF"},
-        {"element": "Operator", "foreground": "#4EC9B0FF"},
-        {"element": "Literal", "foreground": "#FFFF90FF"},
-        {"element": "local name", "foreground": "#00FFFFFF"},
-        {"element": "field name", "foreground": "#31FF00FF"},
-        {"element": "parameter name", "foreground": "#31FF00FF"},
-        {"element": "method name", "foreground": "#31FF00FF"},
-        {"element": "extension method name", "foreground": "#31FF00FF"},
-        {"element": "namespace name", "foreground": "#569CD6FF"}
-      ]
-    },
     {
       "category": "builtin:Text Editor Language Service Items",
       "elements": [
         {"element": "Keyword", "foreground": "#00FFFFFF"},
-        {"element": "Comment", "foreground": "#7F8585FF"},
+        {"element": "Comment", "foreground": "#6f6f6fff"},
         {"element": "Identifier", "foreground": "#31FF00FF"},
-        {"element": "String", "foreground": "#E8BF6AFF"},
+        {"element": "String", "foreground": "#FFFF90FF"},
         {"element": "Number", "foreground": "#E8BF6AFF"},
         {"element": "Text", "foreground": "#31FF00FF"},
         {"element": "Operator", "foreground": "#E8BF6AFF"}
+      ]
+    },
+    {
+      "category": "builtin:Text Editor MEF Items", 
+      "elements": 
+        [
+          {"element": "punctuation", "foreground": "#00FFFFFF"},
+          {"element": "keyword - control", "foreground": "#4EC9B0FF"}
+        ]},
+    { 
+      "category": "builtin:Cpp Text Editor MEF Items",
+      "elements": [
+        {"element": "Type", "foreground": "#00FFFFFF"},
+        {"element": "Excluded Code", "foreground": "#00D8FF88"},
+        {"element": "Operator", "foreground": "#B5B5C9FF"},
+        {"element": "Preprocessor Keyword", "foreground": "#E8BF6AFF"},
+        {"element": "Literal", "foreground": "#FFFF90FF"},
+        {"element": "local name", "foreground": "#31FF00FF"},
+        {"element": "field name", "foreground": "#31FF00FF"},
+        {"element": "parameter name", "foreground": "#31FF00FF"},
+        {"element": "method name", "foreground": "#31FF00FF"},
+        {"element": "extension method name", "foreground": "#31FF00FF"},
+        {"element": "namespace name", "foreground": "#FFFF90FF"},
+        {"element": "CppStringEscapeCharacterSyntacticTokenFormat", "foreground": "#FFFF90FF"},
+        {"element": "CppControlKeywordSyntacticTokenFormat", "foreground": "#00FFFFFF"},
+        {"element": "interface name", "foreground": "#14B8A6FF"},
+        {"element": "type parameter name", "foreground": "#31FF00FF"},
+        {"element": "enum name", "foreground": "#31FF00FF"},
+        {"element": "module name", "foreground": "#31FF00FF"},
+        {"element": "class name", "foreground": "#31FF00FF"},
+        {"element": "delegate name", "foreground": "#31FF00FF"},
+        {"element": "struct name", "foreground": "#31FF00FF"},
+        {"element": "string - verbatim", "foreground": "#E8BF6AFF"},
+        {"element": "preprocessor text", "foreground": "#E8BF6AFF"},
+        {"element": "local name", "foreground": "#31FF00FF"},
+        {"element": "field name", "foreground": "#31FF00FF"},
+        {"element": "parameter name", "foreground": "#31FF00FF"},
+        {"element": "method name", "foreground": "#31FF00FF"},
+        {"element": "extension method name", "foreground": "#31FF00FF"}
       ]
     },
     {

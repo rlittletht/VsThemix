@@ -6,5 +6,6 @@ export interface ICategoryDefinition
 {
     category: string;
     guid?: string | Guid;
+    ignore?: boolean;
     elements: IElementDefinition[];
 }

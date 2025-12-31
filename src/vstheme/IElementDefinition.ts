@@ -7,4 +7,5 @@ export interface IElementDefinition
     background: string | undefined;
     foreground: string | undefined;
     fontStyle: FontStyleEnum | undefined;
+    ignore?: boolean;
 }
