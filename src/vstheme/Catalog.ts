@@ -92,6 +92,6 @@ export class Catalog
             ]
         };
         
-        catalog.writer.writeLine(JSON.stringify(catalogData, null, 2).replace(/\r?\n/g, "\r\n"));
+        catalog.writer.writeLine(JSON.stringify(catalogData, null, 2));
     }
 }

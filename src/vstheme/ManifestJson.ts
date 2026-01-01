@@ -42,6 +42,6 @@ export class ManifestJson
             files: files
         };
 
-        manifestJson.writer.writeLine(JSON.stringify(manifest, null, 2).replace(/\r?\n/g, "\r\n"));
+        manifestJson.writer.writeLine(JSON.stringify(manifest, null, 2));
     }
 }
