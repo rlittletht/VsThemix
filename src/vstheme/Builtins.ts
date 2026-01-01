@@ -24,7 +24,6 @@ export class Builtins
         ["builtin:ClientDiagnosticsTimeline", new Guid("{694a8994-9208-45d6-bf31-c58f96236fbe}")],
         ["builtin:ClientDiagnosticsTools", new Guid("{9e505e47-0d0d-4681-8c9c-baa2a07771b7}")],
         ["builtin:CodeAnalysis", new Guid("{bbadd5c0-3c00-4c56-aae8-92cd1d1f516b}")],
-        ["builtin:CodeLens", new Guid("{fc88969a-cbed-4940-8f48-142a503e2381}")],
         ["builtin:CodeSenseControls", new Guid("{de7b1121-99a4-4708-aedf-15f40c9b332f}")],
         ["builtin:Command Window", new Guid("{ee1be240-4e81-4beb-8eea-54322b6b1bf5}")],
         ["builtin:CosmosClientTools.2.3.4000.1", new Guid("{6f796f8a-b3b5-49eb-9b25-cb59bd413caf}")],
@@ -93,12 +92,11 @@ export class Builtins
         ["builtin:WorkflowDesigner", new Guid("{e0f1945b-b965-47dc-b22e-3e26a895c895}")],
         ["builtin:WorkItemEditor", new Guid("{2138d120-456d-425e-80b5-88d2401fca23}")],
         ["builtin:XamarinDesigner", new Guid("{78d640b7-154a-4d1e-bbe8-fee14b3ccf29}")],
-        ["builtin:Cpp Text Editor MEF Items", new Guid("{75a05685-00a8-4ded-bae5-e7a50bfa929a}")],
         ["builtin:CodeSense", new Guid("{fc88969a-cbed-4940-8f48-142a503e2381}")],
         ["builtin:ConfigPage", new Guid("{699a73b3-57e2-4754-9364-ee80d6852c2f}")],
-        ["builtin:Editor Tooltip", new Guid("{a9a5637f-b2a8-422e-8fb5-dfb4625f0111}")],
+        ["builtin:Editor Tooltip", new Guid("{a1b2c3d4-e5f6-7890-abcd-ef1234567890}")],
         ["builtin:WelcomeExperience", new Guid("{df76799d-28de-4975-81af-3357270f57eb}")]
-        ]);
+    ]);
 
     static ReduceGuidToBuiltinName(guid: Guid): string | null
     {
@@ -143,6 +141,19 @@ export class Builtins
 
                 category.guid = new Guid(category.guid as string);
             }
+        }
+    }
+
+    static RunUnitTests(): void
+    {
+        // verify that all built-in names map to unique GUIDs
+        const seenGuids = new Set<string>();
+        for (const [name, guid] of this.builtinNameMap.entries())
+        {
+            const guidStr = guid.ToString().toLowerCase();
+            if (seenGuids.has(guidStr))
+                throw new Error(`Duplicate GUID found in Builtins for name: ${name} GUID: ${guidStr}`);
+            seenGuids.add(guidStr);
         }
     }
 }

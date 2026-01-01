@@ -27,6 +27,14 @@ export class ThemeCompiler
         if (!versionRegex.test(themeDef.version))
             throw new Error(`Invalid version format: ${themeDef.version}`);
 
+        // make sure there are no duplicate category definitions
+        const categoryGuids = new Set<string>();
+        for (const categoryDef of themeDef.categoryDefinitions)
+        {
+            if (categoryGuids.has((categoryDef.guid as Guid).ToString()))
+                throw new Error(`Duplicate category GUID found: ${(categoryDef.guid as Guid).ToString()}`);
+            categoryGuids.add((categoryDef.guid as Guid).ToString());
+        }
         return true;
     }
 

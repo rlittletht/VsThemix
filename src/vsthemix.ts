@@ -7,6 +7,7 @@ import { Guid } from "./util/Guid";
 import { ByteArray } from "./util/ByteArray";
 import { PkgString } from "./vstheme/PkgString";
 import { XmlToJson } from "./vstheme/XmlToJson";
+import { Builtins } from "./vstheme/Builtins";
 
 async function main(): Promise<void>
 {
@@ -33,6 +34,7 @@ async function main(): Promise<void>
         ByteArray.RunUnitTests();
         Guid.RunUnitTests();
         PkgString.RunUnitTests();
+        Builtins.RunUnitTests();
 
         console.log("All unit tests passed.");
         exit(0);
