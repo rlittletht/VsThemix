@@ -3,7 +3,8 @@ export enum Operation
 {
     compile = "compile",
     xmlToJson = "xml-to-json",
-    jsonToXml = "json-to-xml"
+    jsonToXml = "json-to-xml",
+    uniquify = "uniquify"
 }
 
 export interface IOptions

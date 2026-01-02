@@ -7,6 +7,7 @@
     "build": "tsc",
     "ut": "node ./build/src/vsthemix.js -ut",
     "test": "run-s build ut",
+    "munge": "node ./build/src/vsthemix.js -operation uniquify -source %npm_config_source% -destination %npm_config_destination%",
     "compile": "node ./build/src/vsthemix.js -operation compile -source %npm_config_source% -destination %npm_config_destination%",
     "convert": "node ./build/src/vsthemix.js -operation xml-to-json -source %npm_config_source% -destination %npm_config_destination%",
     "test-remove-vsix": "start /wait \"\" \"%VSINSTALLDIR%\\Common7\\IDE\\VSIXInstaller.exe\" /quiet /uninstall:\"VsThemix.TestTheme\"",

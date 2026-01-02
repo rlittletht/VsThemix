@@ -1,13 +1,15 @@
 
 import { ThemeCompiler } from "./vstheme/ThemeCompiler";
 import { CmdLineParser, CmdLineOption } from "./util/CmdLineParser";
-import { _defaultOptions, IOptions } from "./util/IOptions";
+import { _defaultOptions, IOptions, Operation } from "./util/IOptions";
 import { exit } from "process";
 import { Guid } from "./util/Guid";
 import { ByteArray } from "./util/ByteArray";
 import { PkgString } from "./vstheme/PkgString";
 import { XmlToJson } from "./vstheme/XmlToJson";
 import { Builtins } from "./vstheme/Builtins";
+import { ColorSet } from "./util/ColorSet";
+import { ThemeMunger } from "./vstheme/ThemeMunger";
 
 async function main(): Promise<void>
 {
@@ -35,20 +37,28 @@ async function main(): Promise<void>
         Guid.RunUnitTests();
         PkgString.RunUnitTests();
         Builtins.RunUnitTests();
+        ColorSet.RunAllUnitTests();
 
         console.log("All unit tests passed.");
         exit(0);
     }
 
-    if (options.operation === "compile")
+    if (options.operation === Operation.compile)
     {
         const compiler: ThemeCompiler = new ThemeCompiler(options.destination);
         await compiler.CompileTheme(options.source, options.saveTemps, options.testBuild);
     }
-    else if (options.operation === "xml-to-json")
+    else if (options.operation === Operation.xmlToJson)
     {
         await XmlToJson.ConvertXmlToJson(options.source, options.destination);
     }
+    else if (options.operation === Operation.uniquify)
+    {   
+        const munger: ThemeMunger = new ThemeMunger(options.destination);
+
+        await munger.MakeUniqueColors(options.source);
+    }
+
 }
 
 // Top-level invocation
