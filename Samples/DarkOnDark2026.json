@@ -46,7 +46,40 @@
           {"element": "type parameter name", "foreground": "#31FF00FF"},
           {"element": "enum name", "foreground": "#31FF00FF"},
           {"element": "CppStringEscapeCharacterSyntacticTokenFormat", "foreground": "#FFFF90FF"},
-          {"element": "CppControlKeywordSyntacticTokenFormat", "foreground": "#00FFFFFF"}
+          {"element": "CppControlKeywordSyntacticTokenFormat", "foreground": "#00FFFFFF"},
+
+          {"element": "CppTypeSemanticTokenFormat", "foreground": "#31FF00FF"},
+          {"element": "CppParameterSemanticTokenFormat", "foreground": "#31FF00FF"},
+          {"element": "CppNamespaceSemanticTokenFormat", "foreground": "#FFFF90FF"},
+          {"element": "CppClassTemplateSemanticTokenFormat", "foreground": "#31FF00FF"},
+          {"element": "CppMemberFunctionSemanticTokenFormat", "foreground": "#31FF00FF"},
+
+          {"element": "CppFunctionSemanticTokenFormat", "foreground": "#FFFF90FF"},
+
+          {"element": "CppStaticMemberFunctionSemanticTokenFormat", "foreground": "#31FF00FF"},
+          {"element": "CppLocalVariableSemanticTokenFormat", "foreground": "#31FF00FF"},
+        {"element": "CppGlobalVariableSemanticTokenFormat", "foreground": "#31FF00FF"},
+        {"element": "CppNewDeleteSemanticTokenFormat", "foreground": "#31FF00FF"},
+        {"element": "CppStringDelimiterCharacterSyntacticTokenFormat", "foreground": "#FFFF90FF"},
+
+        {"element": "CppMacroSemanticTokenFormat", "foreground": "#00FE42FF"},
+        {"element": "CppEnumSemanticTokenFormat", "foreground": "#01FE41FF"},
+        {"element": "CppRefTypeSemanticTokenFormat", "foreground": "#15B7A6FF"},
+        {"element": "CppValueTypeSemanticTokenFormat", "foreground": "#15B8A5FF"},
+        {"element": "CppMemberFieldSemanticTokenFormat", "foreground": "#01FF42FF"},
+        {"element": "CppStaticMemberFieldSemanticTokenFormat", "foreground": "#01FE40FF"},
+        {"element": "CppPropertySemanticTokenFormat", "foreground": "#01FE42FF"},
+        {"element": "CppEventSemanticTokenFormat", "foreground": "#00FD41FF"},
+        {"element": "CppGenericTypeSemanticTokenFormat", "foreground": "#00FF43FF"},
+        {"element": "CppFunctionTemplateSemanticTokenFormat", "foreground": "#FEFF01FF"},
+        {"element": "CppLabelSemanticTokenFormat", "foreground": "#02FF41FF"},
+        {"element": "CppUDLRawSemanticTokenFormat", "foreground": "#F6B700FF"},
+        {"element": "CppUDLNumberSemanticTokenFormat", "foreground": "#F4B600FF"},
+        {"element": "CppUDLStringSemanticTokenFormat", "foreground": "#FE2B6CFF"},
+        {"element": "CppOperatorSemanticTokenFormat", "foreground": "#00FD3FFF"},
+        {"element": "CppMemberOperatorSemanticTokenFormat", "foreground": "#00FD43FF"},
+        {"element": "CppSuggestedActionFormat", "foreground": "#22C45EFF"},
+        {"element": "C/C++ User Keywords", "foreground": "#02FD41FF"}
         ]},
     {
       "category": "builtin:Text Editor Text Manager Items",
